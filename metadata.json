@@ -1,0 +1,6 @@
+{
+  "name": "Mountly",
+  "description": "Mountly is a macOS utility for detecting, mounting and managing supported external filesystems.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
