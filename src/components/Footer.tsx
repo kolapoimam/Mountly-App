@@ -60,8 +60,8 @@ export function Footer({
           </nav>
         </div>
 
-        {/* Connected footer attribution with NO divider line - centered on mobile */}
-        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs text-stone-500">
+        {/* Connected footer attribution with NO divider line - centered on mobile, right-aligned on web */}
+        <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1 text-xs text-stone-500">
           <span>
             Built by{' '}
             <a

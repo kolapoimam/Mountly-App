@@ -352,10 +352,10 @@ export function PrivacyPolicyPage({ onBackToHome }: PrivacyPolicyPageProps) {
         </article>
       </main>
 
-      {/* Connected Footer without divider line, centered on mobile */}
+      {/* Connected Footer without divider line, centered on mobile, right-aligned on web */}
       <footer className="border-t border-stone-800/80 bg-stone-950 text-stone-400 py-10">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center md:text-left">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs text-stone-500">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center md:text-right">
+          <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1 text-xs text-stone-500">
             <span>
               Built by{' '}
               <a
