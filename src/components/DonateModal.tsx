@@ -41,13 +41,13 @@ export function DonateModal({ isOpen, onClose }: DonateModalProps) {
 
           <div className="pt-2">
             <a
-              href="https://kolapo.ng"
+              href="https://paystack.shop/pay/pmbuddy"
               target="_blank"
               rel="noopener noreferrer"
               id="donate-modal-external-link"
               className="w-full py-3 px-4 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm flex items-center justify-center gap-2 shadow-md shadow-blue-900/20 hover:shadow-blue-800/30 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
             >
-              <span>Continue to Developer Page</span>
+              <span>Continue to Donation</span>
               <ExternalLink className="h-4 w-4" />
             </a>
           </div>

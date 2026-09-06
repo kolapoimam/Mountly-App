@@ -12,11 +12,11 @@ export function Footer({
 
   return (
     <footer id="site-footer" className="border-t border-stone-800/80 bg-stone-950 text-stone-400 py-12">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-6">
+      <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 space-y-6 text-center md:text-left">
         {/* Top: Brand and Links without divider line */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div className="flex flex-col md:flex-row md:items-center justify-between items-center gap-6">
           {/* Brand */}
-          <div className="space-y-1.5">
+          <div className="flex flex-col items-center md:items-start space-y-1.5">
             <div className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-stone-900 border border-stone-800 text-blue-400">
                 <HardDrive className="h-3.5 w-3.5" aria-hidden="true" />
@@ -31,7 +31,7 @@ export function Footer({
           </div>
 
           {/* Nav links */}
-          <nav className="flex flex-wrap items-center gap-6 text-xs font-medium text-stone-400">
+          <nav className="flex flex-wrap items-center justify-center md:justify-end gap-6 text-xs font-medium text-stone-400">
             <a
               href={downloadUrl}
               target="_blank"
@@ -60,8 +60,8 @@ export function Footer({
           </nav>
         </div>
 
-        {/* Connected footer attribution with NO divider line */}
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-stone-500">
+        {/* Connected footer attribution with NO divider line - centered on mobile */}
+        <div className="flex flex-wrap items-center justify-center md:justify-start gap-x-3 gap-y-1 text-xs text-stone-500">
           <span>
             Built by{' '}
             <a

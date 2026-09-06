@@ -7,8 +7,8 @@ interface FaqItem {
 }
 
 interface FAQProps {
-  onOpenDownload: () => void;
-  onOpenDonate: () => void;
+  onOpenDownload?: () => void;
+  onOpenDonate?: () => void;
 }
 
 export function FAQ({ onOpenDownload, onOpenDonate }: FAQProps) {
@@ -105,15 +105,16 @@ export function FAQ({ onOpenDownload, onOpenDonate }: FAQProps) {
               <Download className="h-3.5 w-3.5" />
               <span>Download Mountly</span>
             </a>
-            <button
-              type="button"
+            <a
               id="faq-donate-button"
-              onClick={onOpenDonate}
+              href="https://paystack.shop/pay/pmbuddy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-full border border-stone-700 hover:border-stone-600 bg-stone-800 hover:bg-stone-700 text-stone-300 hover:text-white font-medium text-xs transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
             >
               <Heart className="h-3.5 w-3.5 text-blue-400" />
               <span>Donate</span>
-            </button>
+            </a>
           </div>
         </div>
       </div>

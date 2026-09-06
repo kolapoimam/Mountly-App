@@ -2,8 +2,8 @@ import { Download, Heart } from 'lucide-react';
 import { ProductPreview } from './ProductPreview';
 
 interface HeroProps {
-  onOpenDownload: () => void;
-  onOpenDonate: () => void;
+  onOpenDownload?: () => void;
+  onOpenDonate?: () => void;
 }
 
 export function Hero({ onOpenDownload, onOpenDonate }: HeroProps) {
@@ -35,15 +35,16 @@ export function Hero({ onOpenDownload, onOpenDonate }: HeroProps) {
               <span>Download Mountly</span>
             </a>
 
-            <button
-              type="button"
+            <a
               id="hero-donate-button"
-              onClick={onOpenDonate}
+              href="https://paystack.shop/pay/pmbuddy"
+              target="_blank"
+              rel="noopener noreferrer"
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full border border-stone-300 dark:border-stone-800 hover:border-stone-400 dark:hover:border-stone-700 bg-white dark:bg-stone-900/70 hover:bg-stone-100 dark:hover:bg-stone-800 text-stone-800 dark:text-stone-300 hover:text-stone-950 dark:hover:text-white font-medium text-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 shadow-xs"
             >
               <Heart className="h-4 w-4 text-blue-500 dark:text-blue-400" aria-hidden="true" />
               <span>Donate</span>
-            </button>
+            </a>
           </div>
         </div>
 

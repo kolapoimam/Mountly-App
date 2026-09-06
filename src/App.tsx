@@ -32,20 +32,26 @@ export default function App() {
     }
   }, [theme]);
 
-  // Support URL hash routing for #privacy
+  // Support URL path and hash routing (/privacy and #privacy) for Vercel and local SPA
   useEffect(() => {
-    const handleHash = () => {
-      if (window.location.hash === '#privacy') {
+    const handleRoute = () => {
+      const path = window.location.pathname.replace(/\/+$/, '');
+      const hash = window.location.hash;
+      if (path === '/privacy' || hash === '#privacy') {
         setCurrentView('privacy');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (!window.location.hash || window.location.hash === '#' || window.location.hash === '#top') {
+      } else {
         setCurrentView('home');
       }
     };
 
-    handleHash();
-    window.addEventListener('hashchange', handleHash);
-    return () => window.removeEventListener('hashchange', handleHash);
+    handleRoute();
+    window.addEventListener('popstate', handleRoute);
+    window.addEventListener('hashchange', handleRoute);
+    return () => {
+      window.removeEventListener('popstate', handleRoute);
+      window.removeEventListener('hashchange', handleRoute);
+    };
   }, []);
 
   const toggleTheme = () => {
@@ -54,13 +60,19 @@ export default function App() {
 
   const handleOpenPrivacy = () => {
     setCurrentView('privacy');
-    window.location.hash = '#privacy';
+    try {
+      window.history.pushState({ page: 'privacy' }, '', '/privacy');
+    } catch {
+      window.location.hash = '#privacy';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const handleBackToHome = () => {
     setCurrentView('home');
-    if (window.location.hash === '#privacy') {
+    try {
+      window.history.pushState({ page: 'home' }, '', '/');
+    } catch {
       window.location.hash = '';
     }
     window.scrollTo({ top: 0, behavior: 'smooth' });

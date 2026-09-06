@@ -94,10 +94,12 @@ export function Navigation({
               href="https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 sm:px-4 py-1.5 sm:py-1.5 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 active:scale-[0.98]"
+              aria-label="Download Mountly"
+              title="Download Mountly"
+              className="inline-flex items-center justify-center gap-1.5 h-7 sm:h-8 px-2.5 sm:px-4 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 active:scale-[0.98]"
             >
               <Download className="h-3.5 w-3.5" aria-hidden="true" />
-              <span>Download</span>
+              <span className="hidden sm:inline">Download</span>
             </a>
 
             {/* Mobile menu toggle */}
