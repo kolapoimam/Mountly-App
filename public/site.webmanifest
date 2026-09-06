@@ -1,0 +1,22 @@
+{
+  "name": "Mountly",
+  "short_name": "Mountly",
+  "description": "External drives, made accessible. Modern macOS utility for detecting and mounting external filesystems.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0a09",
+  "theme_color": "#0c0a09",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}

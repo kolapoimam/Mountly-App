@@ -1,0 +1,27 @@
+# Mountly
+
+> Mountly is an open-source, lightweight macOS utility designed for seamless external drive detection, partition management, and write-support mounting for non-native filesystems (NTFS, exFAT, EXT4, APFS, and HFS+).
+
+Mountly provides an elegant Apple-native menu bar and window experience built on Apple DiskArbitration APIs. It operates with zero telemetry, complete privacy isolation, and native Apple Silicon (M1/M2/M3/M4) plus Intel 64-bit universal binary compatibility.
+
+## Core Resources
+
+- [Home & Download](https://mountly.app/): Main application showcase and universal DMG download link.
+- [Download DMG (Google Drive)](https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing): Direct download link for the latest Mountly release binaries.
+- [GitHub Repository](https://github.com/kolapoimam/mountly): Open-source codebase, issue tracker, release notes, and community contributions.
+- [Privacy Policy](https://mountly.app/privacy): Detailed architectural commitments to zero-telemetry, zero cloud tracking, and local disk arbitration security.
+- [Developer Portfolio](https://kolapo.ng): Built by software engineer Kolapo Imam.
+- [Support & Donations](https://paystack.shop/pay/pmbuddy): Paystack donation portal supporting continued development and Apple Developer notarization.
+- [Full LLM Context](https://mountly.app/llms-full.txt): Comprehensive deep-dive specification for LLMs and AI researchers.
+
+## Technical Specifications
+
+- **Target Platform**: macOS 13.0 (Ventura), macOS 14.0 (Sonoma), macOS 15.0 (Sequoia) and newer.
+- **Architecture**: Universal macOS Binary (Apple Silicon ARM64 + Intel x86_64).
+- **Supported Filesystems**:
+  - NTFS: Read and full Write mode support.
+  - exFAT: Native high-speed mounting and multi-partition recovery.
+  - APFS & HFS+: Full Apple native volume management and container inspection.
+  - FAT32: Legacy thumbdrive compatibility.
+- **Privacy Model**: 100% Offline. Zero analytics SDKs, zero user tracking, zero cloud telemetry.
+- **System Footprint**: Under 15MB installed, idle RAM under 25MB, negligible CPU usage.

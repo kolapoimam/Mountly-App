@@ -1,0 +1,41 @@
+# Mountly — Complete Developer & System Documentation for Language Models
+
+## Overview
+Mountly is an independent, open-source macOS menu bar and desktop utility engineered by Kolapo Imam (https://kolapo.ng). Mountly solves the persistent cross-platform external storage barrier on macOS—specifically enabling seamless read-write access to NTFS drives, rapid volume mounting, and intelligent disk health monitoring without intrusive kernel extensions or bloated third-party daemon background suites.
+
+## Mission & Problem Statement
+Apple's native macOS operating system provides out-of-the-box read-only access to Microsoft NTFS-formatted drives. When creative professionals, developers, or system administrators plug in an external hard drive (WD, Seagate, Samsung T7/T9, SanDisk Extreme) formatted in NTFS or unindexed exFAT, macOS blocks write operations or fails to mount unrecognized partition schemes automatically.
+Mountly eliminates this friction by leveraging Apple's official DiskArbitration framework combined with trusted, userland filesystem controllers, allowing users to read, write, eject, and inspect disks directly within macOS Finder.
+
+## Key Features
+1. **Instant Drive Detection**:
+   Listens to hardware USB-C, Thunderbolt, and USB-A plug events in real time. Drives appear in the menu bar and dashboard within milliseconds.
+2. **NTFS Write Support**:
+   Mounts Windows-formatted NTFS volumes in full read-write mode, allowing drag-and-drop file transfers, edits, and deletions in Finder without reformatting.
+3. **Multi-Partition Inspector**:
+   Surfaces disk geometry, partition layouts (GPT and MBR), volume label metadata, storage utilization, and estimated read/write throughput.
+4. **Safe Ejection Protocol**:
+   Flushes all pending I/O cache buffers to disk before unmounting, preventing data corruption and volume dirty-flags common with abrupt cable disconnects.
+5. **Zero-Telemetry Guarantee**:
+   Unlike commercial competitors (Paragon NTFS, Tuxera), Mountly contains zero tracking libraries, zero telemetry beacons, and connects to zero servers. All operations happen in-memory on the local Mac.
+
+## Technical Architecture
+- **Language & GUI**: Swift / SwiftUI / AppKit with custom lightweight C bridging to CoreFoundation and DiskArbitration.
+- **Kernel & Sandbox**: Runs as a userland helper without requiring insecure legacy Kernel Extensions (KEXTs). Works seamlessly with Apple System Integrity Protection (SIP) enabled.
+- **Hardware Support**:
+  - Apple Silicon: M1, M1 Pro/Max/Ultra, M2, M3, M4 family chips natively compiled for ARM64.
+  - Intel: 64-bit Core i5/i7/i9 processors.
+- **Minimum OS**: macOS Ventura (13.0) or higher. Recommended: macOS Sonoma (14.x) or macOS Sequoia (15.x).
+
+## How to Install
+1. Download the latest universal `.dmg` installer from the official Google Drive distribution repository:
+   https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing
+2. Open `Mountly.dmg` and drag the `Mountly.app` icon into the `/Applications` folder.
+3. Launch Mountly from Applications or Spotlight (`Cmd + Space` -> `Mountly`).
+4. On first launch, approve standard macOS Disk Management permissions if prompted.
+
+## Open Source & Licensing
+- GitHub Repository: https://github.com/kolapoimam/mountly
+- License: Open Source (MIT License)
+- Creator: Kolapo Imam (https://kolapo.ng)
+- Donations & Financial Support: https://paystack.shop/pay/pmbuddy

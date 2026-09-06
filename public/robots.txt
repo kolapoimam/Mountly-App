@@ -1,0 +1,23 @@
+# Robots.txt for Mountly (macOS Utility)
+User-agent: *
+Allow: /
+
+# LLM Crawlers & AI Indexing
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# Sitemaps & Context Feeds
+Sitemap: https://mountly.app/sitemap.xml
+LLMs-Txt: https://mountly.app/llms.txt
