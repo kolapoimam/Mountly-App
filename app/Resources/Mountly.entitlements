@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!--
+      App Sandbox is intentionally disabled — see docs/ARCHITECTURE.md §5
+      and docs/SECURITY.md for the documented reasoning (privileged helper
+      registration, Disk Arbitration access to arbitrary external disks,
+      and invoking an installed NTFS-3G binary are not expressible inside
+      the sandbox's XPC/service model). Hardened Runtime remains enabled
+      for notarization; no entitlement here weakens SIP, kernel protection,
+      or code-signing enforcement.
+    -->
+    <key>com.apple.security.app-sandbox</key><false/>
+    <key>com.apple.security.network.client</key><true/>
+    <key>com.apple.security.cs.allow-jit</key><false/>
+    <key>com.apple.security.cs.disable-library-validation</key><false/>
+    <key>com.apple.security.automation.apple-events</key><false/>
+</dict>
+</plist>

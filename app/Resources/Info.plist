@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleName</key><string>Mountly</string>
+    <key>CFBundleDisplayName</key><string>Mountly</string>
+    <key>CFBundleIdentifier</key><string>com.mountly.app</string>
+    <key>CFBundleVersion</key><string>1</string>
+    <key>CFBundleShortVersionString</key><string>1.0.0</string>
+    <key>CFBundlePackageType</key><string>APPL</string>
+    <key>CFBundleExecutable</key><string>Mountly</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
+    <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
+    <key>LSMinimumSystemVersion</key><string>14.0</string>
+    <key>LSApplicationCategoryType</key><string>public.app-category.utilities</string>
+    <key>NSHumanReadableCopyright</key><string>Mountly is an independent utility and is not affiliated with, endorsed by, or limited to any drive or storage device manufacturer.</string>
+    <key>LSUIElement</key><false/>
+    <key>NSSupportsAutomaticTermination</key><true/>
+    <key>NSSupportsSuddenTermination</key><false/>
+    <key>NSUserNotificationsUsageDescription</key><string>Mountly can notify you when drives are connected, mounted, or disconnected.</string>
+    <key>NSHighResolutionCapable</key><true/>
+</dict>
+</plist>
