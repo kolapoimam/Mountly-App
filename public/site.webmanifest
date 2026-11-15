@@ -4,8 +4,8 @@
   "description": "External drives, made accessible. Modern macOS utility for detecting and mounting external filesystems.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0c0a09",
-  "theme_color": "#0c0a09",
+  "background_color": "#faf6ee",
+  "theme_color": "#faf6ee",
   "icons": [
     {
       "src": "/favicon.svg",

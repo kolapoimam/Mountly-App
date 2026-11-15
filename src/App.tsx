@@ -1,51 +1,30 @@
-import { useState, useEffect } from 'react';
-import type { ThemeMode } from './types';
+import { useEffect, useState } from 'react';
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { FeatureGrid } from './components/FeatureGrid';
 import { CompatibilitySection } from './components/CompatibilitySection';
 import { FAQ } from './components/FAQ';
+import { DownloadSection } from './components/DownloadSection';
 import { Footer } from './components/Footer';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
-import { DownloadModal } from './components/DownloadModal';
-import { DonateModal } from './components/DonateModal';
+
+type View = 'home' | 'privacy';
+
+function viewFromLocation(): View {
+  const path = window.location.pathname.replace(/\/+$/, '');
+  return path === '/privacy' || window.location.hash === '#privacy' ? 'privacy' : 'home';
+}
 
 export default function App() {
-  const [theme, setTheme] = useState<ThemeMode>('dark');
-  const [currentView, setCurrentView] = useState<'home' | 'privacy'>('home');
-  const [isDownloadOpen, setIsDownloadOpen] = useState(false);
-  const [isDonateOpen, setIsDonateOpen] = useState(false);
+  const [view, setView] = useState<View>(viewFromLocation);
 
-  // Sync theme class to document root and body (defaulted to dark mode)
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === 'light') {
-      root.classList.remove('dark');
-      root.classList.add('light');
-      document.body.classList.remove('bg-stone-950', 'text-stone-100');
-      document.body.classList.add('bg-[#fafaf9]', 'text-stone-900');
-    } else {
-      root.classList.remove('light');
-      root.classList.add('dark');
-      document.body.classList.remove('bg-[#fafaf9]', 'text-stone-900');
-      document.body.classList.add('bg-stone-950', 'text-stone-100');
-    }
-  }, [theme]);
-
-  // Support URL path and hash routing (/privacy and #privacy) for Vercel and local SPA
+  // Support /privacy and #privacy (Vercel rewrites every path to index.html)
   useEffect(() => {
     const handleRoute = () => {
-      const path = window.location.pathname.replace(/\/+$/, '');
-      const hash = window.location.hash;
-      if (path === '/privacy' || hash === '#privacy') {
-        setCurrentView('privacy');
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      } else {
-        setCurrentView('home');
-      }
+      const next = viewFromLocation();
+      setView(next);
+      if (next === 'privacy') window.scrollTo({ top: 0, behavior: 'instant' });
     };
-
-    handleRoute();
     window.addEventListener('popstate', handleRoute);
     window.addEventListener('hashchange', handleRoute);
     return () => {
@@ -54,87 +33,40 @@ export default function App() {
     };
   }, []);
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
-  };
+  useEffect(() => {
+    document.title =
+      view === 'privacy' ? 'Privacy Policy · Mountly' : 'Mountly — External drives, made accessible.';
+  }, [view]);
 
-  const handleOpenPrivacy = () => {
-    setCurrentView('privacy');
+  const navigate = (next: View) => {
+    setView(next);
     try {
-      window.history.pushState({ page: 'privacy' }, '', '/privacy');
+      window.history.pushState({ page: next }, '', next === 'privacy' ? '/privacy' : '/');
     } catch {
-      window.location.hash = '#privacy';
+      window.location.hash = next === 'privacy' ? '#privacy' : '';
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
-  const handleBackToHome = () => {
-    setCurrentView('home');
-    try {
-      window.history.pushState({ page: 'home' }, '', '/');
-    } catch {
-      window.location.hash = '';
-    }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (currentView === 'privacy') {
+  if (view === 'privacy') {
     return (
-      <div id="mountly-app-root" className="theme-dark dark min-h-screen bg-stone-950 text-stone-100">
-        <PrivacyPolicyPage onBackToHome={handleBackToHome} />
+      <div id="mountly-app-root">
+        <PrivacyPolicyPage onBackToHome={() => navigate('home')} />
       </div>
     );
   }
 
   return (
-    <div
-      id="mountly-app-root"
-      className="theme-dark dark min-h-screen bg-stone-950 text-stone-100 transition-colors duration-200"
-    >
-      {/* Floating Pill Header Navigation */}
-      <Navigation
-        theme={theme}
-        onToggleTheme={toggleTheme}
-        onOpenDownload={() => setIsDownloadOpen(true)}
-      />
-
-      {/* Main Content: Max 4 Focused Sections */}
-      <main className="pt-20 sm:pt-24 md:pt-28">
-        {/* Section 1: Hero with Interactive Product Window Preview */}
-        <Hero
-          onOpenDownload={() => setIsDownloadOpen(true)}
-          onOpenDonate={() => setIsDonateOpen(true)}
-        />
-
-        {/* Section 2: Features */}
+    <div id="mountly-app-root" className="min-h-screen overflow-x-clip bg-cream text-ink">
+      <Navigation />
+      <main>
+        <Hero />
         <FeatureGrid />
-
-        {/* Section 3: Compatibility */}
         <CompatibilitySection />
-
-        {/* Section 4: FAQ & Download */}
-        <FAQ
-          onOpenDownload={() => setIsDownloadOpen(true)}
-          onOpenDonate={() => setIsDonateOpen(true)}
-        />
+        <FAQ />
+        <DownloadSection />
       </main>
-
-      {/* Clean Minimalist Footer */}
-      <Footer
-        onOpenDownload={() => setIsDownloadOpen(true)}
-        onOpenPrivacy={handleOpenPrivacy}
-      />
-
-      {/* Action Modals */}
-      <DownloadModal
-        isOpen={isDownloadOpen}
-        onClose={() => setIsDownloadOpen(false)}
-      />
-
-      <DonateModal
-        isOpen={isDonateOpen}
-        onClose={() => setIsDonateOpen(false)}
-      />
+      <Footer onOpenPrivacy={() => navigate('privacy')} />
     </div>
   );
 }

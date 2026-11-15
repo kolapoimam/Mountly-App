@@ -1,377 +1,304 @@
-import { useState } from 'react';
+import type { ReactNode } from 'react';
 import {
-  HardDrive,
   ArrowLeft,
-  ShieldCheck,
-  Lock,
-  EyeOff,
-  ServerOff,
-  ExternalLink,
-  Download,
-  Terminal,
-  ChevronDown,
   CheckCircle2,
+  Download,
+  ExternalLink,
+  EyeOff,
   FileCode2,
+  HardDrive,
+  Lock,
+  ServerOff,
+  ShieldCheck,
+  Terminal,
 } from 'lucide-react';
+import { Accordion } from './Accordion';
+import type { AccordionEntry } from './Accordion';
+import { AUTHOR_URL, DOWNLOAD_URL, GITHUB_URL, Wordmark } from './Brand';
+import { Footer } from './Footer';
 
 interface PrivacyPolicyPageProps {
   onBackToHome: () => void;
 }
 
-export function PrivacyPolicyPage({ onBackToHome }: PrivacyPolicyPageProps) {
-  const downloadUrl = 'https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing';
-  const donateUrl = 'https://paystack.shop/pay/pmbuddy';
+const PRIVACY_FAQS: AccordionEntry[] = [
+  {
+    q: 'Does Mountly ever transmit disk names or serial numbers?',
+    a: 'No. Device descriptors, volume labels, and filesystem partition tables are queried strictly in-memory using Apple DiskArbitration and are discarded upon eject or app termination.',
+  },
+  {
+    q: 'Does Mountly send crash reports or analytics?',
+    a: 'No. Mountly contains zero crash analytics SDKs, zero telemetry probes, and no marketing tags. If an error occurs during disk mounting, diagnostic messages are sent solely to your local macOS Console.',
+  },
+  {
+    q: 'Can Mountly read or index files on my mounted drives?',
+    a: 'No. Mountly operates as a mounting controller, not a file indexer. Once a drive is mounted, your file operations are handled directly by macOS Finder and your chosen applications.',
+  },
+  {
+    q: 'How can I verify these privacy claims?',
+    a: 'Mountly is open source. You can inspect the source code, examine the project’s network entitlements, and build the binary directly from GitHub.',
+  },
+];
 
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+const PRINCIPLES = [
+  {
+    title: 'Zero Network Activity',
+    body: 'No telemetry beacons, analytics pings, or background server calls. Mountly functions completely severed from the internet.',
+    icon: ServerOff,
+    card: 'bg-cobalt-tint',
+    tile: 'bg-cobalt text-white',
+  },
+  {
+    title: 'Apple DiskArbitration',
+    body: 'Mounting and partition detection rely directly on official Apple frameworks without unsafe kernel modifications.',
+    icon: HardDrive,
+    card: 'bg-mint-tint',
+    tile: 'bg-mint text-white',
+  },
+  {
+    title: 'Zero File Inspection',
+    body: 'Mountly never catalogs, reads, or indexes contents on your storage devices. Discovered volumes open directly in Finder.',
+    icon: Lock,
+    card: 'bg-sun-tint',
+    tile: 'bg-sun text-ink',
+  },
+];
 
-  const toggleFaq = (idx: number) => {
-    setOpenFaq((prev) => (prev === idx ? null : idx));
-  };
+const NOT_COLLECTED = [
+  'No user identities or account info',
+  'No unique hardware identifiers',
+  'No session logs or launch counters',
+  'No IP addresses or location data',
+];
 
-  const privacyFaqs = [
-    {
-      q: 'Does Mountly ever transmit disk names or serial numbers?',
-      a: 'No. Device descriptors, volume labels, and filesystem partition tables are queried strictly in-memory using Apple DiskArbitration and are discarded upon eject or app termination.',
-    },
-    {
-      q: 'Does Mountly send crash reports or analytics?',
-      a: 'No. Mountly contains zero crash analytics SDKs, zero telemetry probes, and no marketing tags. If an error occurs during disk mounting, diagnostic messages are sent solely to your local macOS Console.',
-    },
-    {
-      q: 'Can Mountly read or index files on my mounted drives?',
-      a: 'No. Mountly operates as a mounting controller, not a file indexer. Once a drive is mounted, your file operations are handled directly by macOS Finder and your chosen applications.',
-    },
-    {
-      q: 'How can I verify these privacy claims?',
-      a: 'Mountly is open source. You can inspect the source code, examine the project’s network entitlements, and build the binary directly from GitHub.',
-    },
-  ];
-
+function PolicySection({
+  number,
+  badge,
+  title,
+  children,
+}: {
+  number: string;
+  badge: string;
+  title: string;
+  children: ReactNode;
+}) {
   return (
-    <div className="min-h-screen bg-stone-950 text-stone-100 flex flex-col justify-between selection:bg-blue-600 selection:text-white">
-      {/* Top Bar / Header */}
-      <header className="border-b border-stone-800/80 bg-stone-950/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <button
-            type="button"
-            onClick={onBackToHome}
-            className="flex items-center gap-2.5 text-stone-300 hover:text-white transition-colors group cursor-pointer"
+    <section className="grid gap-4 border-t border-line pt-10 first:border-t-0 first:pt-0 md:grid-cols-[180px_1fr] md:gap-10">
+      <div>
+        <span className={`inline-flex rounded-lg px-2.5 py-1 font-mono text-[13px] font-medium ${badge}`}>{number}</span>
+      </div>
+      <div className="space-y-4">
+        <h2 className="font-display text-2xl font-bold tracking-[-0.02em] sm:text-[28px]">{title}</h2>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+export function PrivacyPolicyPage({ onBackToHome }: PrivacyPolicyPageProps) {
+  return (
+    <div className="flex min-h-screen flex-col bg-cream text-ink">
+      <header className="sticky top-0 z-50 border-b border-line/80 bg-cream/85 backdrop-blur-xl">
+        <div className="mx-auto flex h-[76px] max-w-6xl items-center justify-between gap-4 px-5 sm:px-6">
+          <a
+            href="/"
+            onClick={(e) => {
+              e.preventDefault();
+              onBackToHome();
+            }}
+            className="flex items-center gap-3 rounded-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-stone-900 border border-stone-800 text-blue-400 group-hover:border-stone-700 transition-colors">
-              <HardDrive className="h-3.5 w-3.5" aria-hidden="true" />
-            </div>
-            <span className="font-bold text-white tracking-tight text-sm">
-              Mountly
+            <Wordmark />
+            <span className="hidden rounded-full border border-line bg-white px-3 py-1 text-[13px] font-medium text-muted sm:inline">
+              Privacy Policy
             </span>
-            <span className="text-stone-600 text-xs hidden sm:inline">/</span>
-            <span className="text-xs text-stone-400 font-medium hidden sm:inline">Privacy Policy</span>
-          </button>
-
-          <div className="flex items-center gap-2 sm:gap-3">
-            <a
-              href={downloadUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Download Mountly"
-              title="Download Mountly"
-              className="inline-flex items-center justify-center gap-1.5 h-8 px-2.5 sm:px-4 rounded-full text-xs font-semibold bg-blue-600 hover:bg-blue-500 text-white transition-all shadow-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-400"
-            >
-              <Download className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Download</span>
-            </a>
-
+          </a>
+          <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={onBackToHome}
-              className="inline-flex items-center gap-1.5 text-xs text-stone-400 hover:text-white h-8 px-3 rounded-full border border-stone-800 hover:bg-stone-900 transition-colors cursor-pointer"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line bg-white px-4 text-[15px] font-medium text-ink hover:bg-cream-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt"
             >
-              <ArrowLeft className="h-3.5 w-3.5" />
+              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
               <span className="hidden sm:inline">Back to Home</span>
               <span className="sm:hidden">Home</span>
             </button>
+            <a
+              href={DOWNLOAD_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Download Mountly"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-4 text-[15px] font-semibold text-white hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-cobalt sm:px-5"
+            >
+              <Download className="h-4 w-4" strokeWidth={2.2} aria-hidden="true" />
+              <span className="hidden sm:inline">Download</span>
+            </a>
           </div>
         </div>
       </header>
 
-      {/* Main Privacy Policy Content */}
-      <main className="flex-1 py-12 sm:py-20">
-        <article className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-16">
-          {/* Hero Header */}
-          <div className="space-y-4 text-center sm:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-blue-950/60 border border-blue-800/60 text-blue-300">
-              <ShieldCheck className="h-3.5 w-3.5 text-blue-400" />
-              <span>Zero-Telemetry Architecture</span>
-            </div>
-            <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white">
-              Privacy Policy
+      <main className="flex-1 px-5 pb-20 pt-16 sm:px-6 sm:pt-20">
+        <article className="mx-auto max-w-5xl">
+          {/* Intro */}
+          <div className="max-w-3xl">
+            <span className="inline-flex items-center gap-2 rounded-full bg-mint-tint px-3.5 py-1.5 text-[13px] font-semibold text-mint-ink">
+              <ShieldCheck className="h-4 w-4" aria-hidden="true" />
+              Zero-Telemetry Architecture
+            </span>
+            <h1 className="mt-6 font-display text-[clamp(44px,6.4vw,84px)] font-extrabold leading-[0.98] tracking-[-0.045em]">
+              Privacy{' '}
+              <span className="inline-block -rotate-2 rounded-[0.18em] bg-sun px-[0.16em] pb-[0.06em]">Policy</span>
             </h1>
-            <p className="text-base sm:text-lg text-stone-400 max-w-2xl leading-relaxed">
+            <p className="mt-7 max-w-2xl text-lg leading-relaxed text-muted sm:text-xl">
               Mountly is designed from first principles to be completely local, private, and transparent. We never track you, collect data, or connect to external servers.
             </p>
-            <div className="pt-1 flex flex-wrap items-center justify-center sm:justify-start gap-4 text-xs text-stone-500 font-mono">
+            <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[13px] text-subtle">
               <span>Effective: September 2026</span>
-              <span>·</span>
+              <span aria-hidden="true">·</span>
               <span>Universal macOS Utility</span>
-              <span>·</span>
-              <span className="text-emerald-400 flex items-center gap-1">
-                <CheckCircle2 className="h-3.5 w-3.5" /> 100% Offline
+              <span aria-hidden="true">·</span>
+              <span className="inline-flex items-center gap-1.5 text-mint-ink">
+                <CheckCircle2 className="h-4 w-4" aria-hidden="true" /> 100% Offline
               </span>
             </div>
           </div>
 
-          {/* 3 Core Principles Bento Cards */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="rounded-2xl border border-stone-800 bg-stone-900/40 p-6 space-y-3 hover:border-stone-700 transition-all">
-              <div className="h-9 w-9 rounded-xl bg-stone-800/90 border border-stone-700/70 flex items-center justify-center text-blue-400">
-                <ServerOff className="h-4 w-4" />
+          {/* Principles */}
+          <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3">
+            {PRINCIPLES.map(({ title, body, icon: Icon, card, tile }) => (
+              <div key={title} className={`flex flex-col gap-4 rounded-[28px] p-7 ${card}`}>
+                <span
+                  className={`flex h-12 w-12 items-center justify-center rounded-[14px] shadow-[inset_0_-4px_0_rgba(0,0,0,0.14)] ${tile}`}
+                >
+                  <Icon className="h-[22px] w-[22px]" strokeWidth={2.1} aria-hidden="true" />
+                </span>
+                <h2 className="mt-2 font-display text-[22px] font-bold tracking-[-0.02em]">{title}</h2>
+                <p className="text-[15px] leading-relaxed text-[#4a463f]">{body}</p>
               </div>
-              <h2 className="text-sm font-bold text-white tracking-tight">
-                Zero Network Activity
-              </h2>
-              <p className="text-xs text-stone-400 leading-relaxed">
-                No telemetry beacons, analytics pings, or background server calls. Mountly functions completely severed from the internet.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-stone-800 bg-stone-900/40 p-6 space-y-3 hover:border-stone-700 transition-all">
-              <div className="h-9 w-9 rounded-xl bg-stone-800/90 border border-stone-700/70 flex items-center justify-center text-emerald-400">
-                <HardDrive className="h-4 w-4" />
-              </div>
-              <h2 className="text-sm font-bold text-white tracking-tight">
-                Apple DiskArbitration
-              </h2>
-              <p className="text-xs text-stone-400 leading-relaxed">
-                Mounting and partition detection rely directly on official Apple frameworks without unsafe kernel modifications.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-stone-800 bg-stone-900/40 p-6 space-y-3 hover:border-stone-700 transition-all">
-              <div className="h-9 w-9 rounded-xl bg-stone-800/90 border border-stone-700/70 flex items-center justify-center text-amber-400">
-                <Lock className="h-4 w-4" />
-              </div>
-              <h2 className="text-sm font-bold text-white tracking-tight">
-                Zero File Inspection
-              </h2>
-              <p className="text-xs text-stone-400 leading-relaxed">
-                Mountly never catalogs, reads, or indexes contents on your storage devices. Discovered volumes open directly in Finder.
-              </p>
-            </div>
+            ))}
           </div>
 
-          {/* Detailed Policy Sections */}
-          <div className="space-y-12 divide-y divide-stone-800/80">
-            {/* Section 1 */}
-            <section className="pt-8 first:pt-0 space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-blue-400 px-2 py-0.5 rounded bg-blue-950/60 border border-blue-900/50">
-                  01
-                </span>
-                <h3 className="text-lg font-bold text-white">
-                  Information Collection & Storage
-                </h3>
-              </div>
-              <p className="text-sm text-stone-300 leading-relaxed">
+          {/* Policy body */}
+          <div className="mt-16 space-y-10 rounded-[32px] border border-line bg-white p-7 sm:p-12">
+            <PolicySection number="01" badge="bg-cobalt-tint text-cobalt-ink" title="Information Collection & Storage">
+              <p className="text-base leading-relaxed text-muted">
                 Mountly does not collect, record, transmit, or monetize any personal information or telemetry data. Specifically:
               </p>
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-stone-400 font-mono">
-                <li className="flex items-center gap-2 p-2.5 rounded-lg bg-stone-900/50 border border-stone-800/70">
-                  <EyeOff className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                  <span>No user identities or account info</span>
-                </li>
-                <li className="flex items-center gap-2 p-2.5 rounded-lg bg-stone-900/50 border border-stone-800/70">
-                  <EyeOff className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                  <span>No unique hardware identifiers</span>
-                </li>
-                <li className="flex items-center gap-2 p-2.5 rounded-lg bg-stone-900/50 border border-stone-800/70">
-                  <EyeOff className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                  <span>No session logs or launch counters</span>
-                </li>
-                <li className="flex items-center gap-2 p-2.5 rounded-lg bg-stone-900/50 border border-stone-800/70">
-                  <EyeOff className="h-3.5 w-3.5 text-blue-400 shrink-0" />
-                  <span>No IP addresses or location data</span>
-                </li>
+              <ul className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                {NOT_COLLECTED.map((item) => (
+                  <li
+                    key={item}
+                    className="flex items-center gap-2.5 rounded-xl border border-line bg-paper px-3.5 py-3 font-mono text-[13px] text-ink"
+                  >
+                    <EyeOff className="h-4 w-4 shrink-0 text-cobalt" aria-hidden="true" />
+                    {item}
+                  </li>
+                ))}
               </ul>
-            </section>
+            </PolicySection>
 
-            {/* Section 2 */}
-            <section className="pt-8 space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-blue-400 px-2 py-0.5 rounded bg-blue-950/60 border border-blue-900/50">
-                  02
-                </span>
-                <h3 className="text-lg font-bold text-white">
-                  Drive Management & File Content Isolation
-                </h3>
-              </div>
-              <p className="text-sm text-stone-300 leading-relaxed">
+            <PolicySection number="02" badge="bg-tangerine-tint text-tangerine-ink" title="Drive Management & File Content Isolation">
+              <p className="text-base leading-relaxed text-muted">
                 When you connect an external USB-C, USB-A, portable SSD, or mechanical hard drive, Mountly inspects only the partition header metadata required to recognize the filesystem type (e.g., NTFS, exFAT, APFS).
               </p>
-              <p className="text-sm text-stone-300 leading-relaxed">
+              <p className="text-base leading-relaxed text-muted">
                 At no point does Mountly scan, index, copy, or transmit directory listings or personal documents stored on your drive. All read and write operations are routed through standard macOS filesystem drivers directly to Finder.
               </p>
-            </section>
+            </PolicySection>
 
-            {/* Section 3 */}
-            <section className="pt-8 space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-blue-400 px-2 py-0.5 rounded bg-blue-950/60 border border-blue-900/50">
-                  03
-                </span>
-                <h3 className="text-lg font-bold text-white">
-                  System Permissions & Helper Privileges
-                </h3>
-              </div>
-              <p className="text-sm text-stone-300 leading-relaxed">
+            <PolicySection number="03" badge="bg-mint-tint text-mint-ink" title="System Permissions & Helper Privileges">
+              <p className="text-base leading-relaxed text-muted">
                 Mounting non-native external filesystems (such as enabling NTFS write mode) may require administrative disk arbitration authorization via macOS Security prompts.
               </p>
-              <div className="p-4 rounded-xl border border-stone-800 bg-stone-900/30 text-xs text-stone-400 flex items-start gap-3">
-                <Terminal className="h-4 w-4 text-blue-400 shrink-0 mt-0.5" />
+              <div className="flex items-start gap-3 rounded-2xl bg-ink p-5 text-[15px] leading-relaxed text-[#e9e3d6]">
+                <Terminal className="mt-0.5 h-5 w-5 shrink-0 text-sun" aria-hidden="true" />
                 <span>
                   Privileges are confined strictly to standard disk mount/unmount operations and safe volume synchronization. Mountly never requests root access to personal user folders or keychain items.
                 </span>
               </div>
-            </section>
+            </PolicySection>
 
-            {/* Section 4 */}
-            <section className="pt-8 space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-blue-400 px-2 py-0.5 rounded bg-blue-950/60 border border-blue-900/50">
-                  04
-                </span>
-                <h3 className="text-lg font-bold text-white">
-                  Website & Download Integrity
-                </h3>
-              </div>
-              <p className="text-sm text-stone-300 leading-relaxed">
+            <PolicySection number="04" badge="bg-sun-tint text-sun-ink" title="Website & Download Integrity">
+              <p className="text-base leading-relaxed text-muted">
                 This website is delivered as static HTML, JavaScript, and CSS. No advertising networks, marketing trackers, or tracking cookies are employed on this domain. Downloads are verified and hosted directly without third-party ad-wrappers or data capture intermediaries.
               </p>
-            </section>
+            </PolicySection>
 
-            {/* Section 5 */}
-            <section className="pt-8 space-y-4">
-              <div className="flex items-center gap-3">
-                <span className="text-xs font-mono font-bold text-blue-400 px-2 py-0.5 rounded bg-blue-950/60 border border-blue-900/50">
-                  05
-                </span>
-                <h3 className="text-lg font-bold text-white">
-                  Open Source Verification & Auditing
-                </h3>
-              </div>
-              <p className="text-sm text-stone-300 leading-relaxed">
+            <PolicySection number="05" badge="bg-lilac-tint text-[#5240c9]" title="Open Source Verification & Auditing">
+              <p className="text-base leading-relaxed text-muted">
                 Trust is established through verifiability. The complete source code of Mountly is maintained openly on GitHub. Anyone can audit the network entitlements, inspect disk helpers, and compile the code independently.
               </p>
-              <div className="pt-2 flex flex-wrap gap-3">
+              <div className="flex flex-wrap gap-3 pt-1">
                 <a
-                  href="https://github.com/kolapoimam/mountly"
+                  href={GITHUB_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-medium text-stone-200 hover:text-white transition-colors"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full bg-ink px-5 text-sm font-semibold text-white hover:bg-black"
                 >
-                  <FileCode2 className="h-3.5 w-3.5 text-blue-400" />
-                  <span>Inspect Source on GitHub</span>
-                  <ExternalLink className="h-3 w-3 text-stone-500" />
+                  <FileCode2 className="h-4 w-4 text-sun" aria-hidden="true" />
+                  Inspect Source on GitHub
+                  <ExternalLink className="h-3.5 w-3.5 text-white/60" aria-hidden="true" />
                 </a>
                 <a
-                  href="https://kolapo.ng"
+                  href={AUTHOR_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-stone-900 hover:bg-stone-800 border border-stone-800 text-xs font-medium text-stone-200 hover:text-white transition-colors"
+                  className="inline-flex min-h-11 items-center gap-2 rounded-full border border-line-2 bg-white px-5 text-sm font-semibold text-ink hover:bg-cream-2"
                 >
-                  <span>Developer Portfolio</span>
-                  <ExternalLink className="h-3 w-3 text-stone-500" />
+                  Developer Portfolio
+                  <ExternalLink className="h-3.5 w-3.5 text-subtle" aria-hidden="true" />
                 </a>
               </div>
-            </section>
+            </PolicySection>
           </div>
 
-          {/* Privacy FAQ Section */}
-          <div className="space-y-4 pt-4">
-            <h3 className="text-xl font-bold text-white">
-              Privacy Questions & Answers
-            </h3>
-            <div className="divide-y divide-stone-800/80 border-y border-stone-800/80">
-              {privacyFaqs.map((item, idx) => {
-                const isOpen = openFaq === idx;
-                return (
-                  <div key={item.q} className="py-4">
-                    <button
-                      type="button"
-                      onClick={() => toggleFaq(idx)}
-                      className="flex w-full items-center justify-between text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 rounded py-1 cursor-pointer"
-                    >
-                      <span className="text-sm font-semibold text-stone-200 pr-4">
-                        {item.q}
-                      </span>
-                      <ChevronDown
-                        className={`h-4 w-4 text-stone-400 transition-transform duration-200 shrink-0 ${
-                          isOpen ? 'rotate-180 text-blue-400' : ''
-                        }`}
-                      />
-                    </button>
-                    {isOpen && (
-                      <div className="mt-2 text-xs sm:text-sm text-stone-400 leading-relaxed pr-6 animate-in fade-in duration-150">
-                        {item.a}
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+          {/* Privacy FAQ */}
+          <div className="mt-20 flex flex-col gap-10 lg:flex-row">
+            <div className="lg:w-[36%] lg:shrink-0">
+              <h2 className="font-display text-[clamp(32px,4vw,48px)] font-extrabold leading-[1.04] tracking-[-0.035em]">
+                Privacy Questions &amp; Answers
+              </h2>
+            </div>
+            <div className="min-w-0 flex-1">
+              <Accordion items={PRIVACY_FAQS} defaultOpen={0} size="md" />
             </div>
           </div>
 
-          {/* Bottom Card Action */}
-          <div className="rounded-2xl border border-stone-800 bg-stone-900/40 p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
-            <div className="space-y-1">
-              <h3 className="text-base font-bold text-white">
+          {/* Return card */}
+          <div className="relative mt-20 flex flex-col items-center justify-between gap-6 overflow-hidden rounded-[32px] bg-cobalt p-8 text-center text-white sm:flex-row sm:p-10 sm:text-left">
+            <div aria-hidden="true" className="dot-grid absolute inset-0" />
+            <div className="relative">
+              <h2 className="font-display text-2xl font-bold tracking-[-0.02em] sm:text-3xl">
                 Ready to return to the application?
-              </h3>
-              <p className="text-xs text-stone-400">
+              </h2>
+              <p className="mt-2 text-base text-[#e3e8ff]">
                 Explore supported filesystems and download Mountly for macOS.
               </p>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
+            <div className="relative flex shrink-0 flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={onBackToHome}
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-stone-700 bg-stone-900 hover:bg-stone-800 text-stone-200 text-xs font-medium transition-colors cursor-pointer"
+                className="inline-flex min-h-12 items-center gap-2 rounded-full border-[1.5px] border-white/55 px-5 text-[15px] font-semibold text-white hover:bg-white/10"
               >
-                <ArrowLeft className="h-3.5 w-3.5" />
-                <span>Back to Home</span>
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                Back to Home
               </button>
               <a
-                href={downloadUrl}
+                href={DOWNLOAD_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-xs font-semibold shadow-sm transition-all"
+                className="inline-flex min-h-12 items-center gap-2 rounded-full bg-cream px-6 text-[15px] font-semibold text-ink shadow-[0_5px_0_var(--color-ink)] hover:bg-white"
               >
-                <Download className="h-3.5 w-3.5" />
-                <span>Download</span>
+                <Download className="h-4 w-4" strokeWidth={2.2} aria-hidden="true" />
+                Download
               </a>
             </div>
           </div>
         </article>
       </main>
 
-      {/* Connected Footer without divider line, centered on mobile, right-aligned on web */}
-      <footer className="border-t border-stone-800/80 bg-stone-950 text-stone-400 py-10">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center md:text-right">
-          <div className="flex flex-wrap items-center justify-center md:justify-end gap-x-3 gap-y-1 text-xs text-stone-500">
-            <span>
-              Built by{' '}
-              <a
-                href="https://kolapo.ng"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="font-medium text-stone-300 hover:text-white underline underline-offset-4 decoration-stone-700 hover:decoration-blue-400 transition-colors"
-              >
-                Kolapo Imam
-              </a>
-            </span>
-            <span className="text-stone-700">·</span>
-            <span>© 2026 Mountly. Independent macOS Utility.</span>
-          </div>
-        </div>
-      </footer>
+      <Footer onOpenPrivacy={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
     </div>
   );
 }

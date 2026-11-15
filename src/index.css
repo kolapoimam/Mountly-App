@@ -1,154 +1,106 @@
 @import "tailwindcss";
 
+/* dark: variants only apply when a .dark class is present, so the site stays light */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+  --font-display: "Bricolage Grotesque", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Ground and ink */
+  --color-cream: #faf6ee;
+  --color-cream-2: #f1eadc;
+  --color-paper: #fbf8f2;
+  --color-line: #e8e1d3;
+  --color-line-2: #e1d8c6;
+  --color-ink: #1b1a17;
+  --color-muted: #5e5a52;
+  --color-subtle: #6b665c;
+
+  /* Filesystem palette */
+  --color-cobalt: #2c4bdb;
+  --color-cobalt-ink: #2440c2;
+  --color-cobalt-tint: #dde5fd;
+  --color-tangerine: #ee6a2f;
+  --color-tangerine-ink: #a8401a;
+  --color-tangerine-tint: #fde6d8;
+  --color-mint: #138a5e;
+  --color-mint-ink: #0e6b48;
+  --color-mint-tint: #d6f0e3;
+  --color-sun: #f2b630;
+  --color-sun-ink: #7a5300;
+  --color-sun-tint: #fcefc9;
+  --color-berry: #c93a6b;
+  --color-berry-tint: #f9dce6;
+  --color-lilac: #6d55e8;
+  --color-lilac-tint: #e7e2fd;
 }
 
 :root {
-  color-scheme: dark light;
+  color-scheme: light;
 }
 
 html {
-  font-family: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
-/* Custom scrollbar */
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sun);
+  color: var(--color-ink);
+}
+
+/* Dotted texture used on the cobalt panels */
+.dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.16) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
-  background: rgba(140, 140, 150, 0.25);
+  background: rgba(27, 26, 23, 0.18);
   border-radius: 9999px;
+  border: 2px solid var(--color-cream);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(140, 140, 150, 0.45);
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.toast-in {
+  animation: toast-in 180ms ease-out;
 }
 
-/* Base Light Mode Refinements */
-.theme-light,
-.light #mountly-app-root {
-  background-color: #fafaf9;
-  color: #1c1917;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.fade-in {
+  animation: fade-in 200ms ease-out;
 }
 
-/* Ensure strong heading contrast in light mode */
-.theme-light h1,
-.theme-light h2,
-.theme-light h3,
-.theme-light h4,
-.theme-light h5,
-.theme-light h6 {
-  color: #0c0a09;
-}
-
-/* Ensure body paragraphs are dark slate/charcoal for optimal readability */
-.theme-light p {
-  color: #44403c;
-}
-
-/* Sections divider lines */
-.theme-light section {
-  border-color: #e7e5e4;
-}
-
-/* Floating pill nav bar in light mode */
-.theme-light #main-navigation {
-  background-color: rgba(255, 255, 255, 0.82) !important;
-  border-color: rgba(229, 231, 235, 0.95) !important;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02) !important;
-}
-
-.theme-light #main-navigation #nav-brand-link span {
-  color: #0c0a09 !important;
-}
-
-.theme-light #main-navigation nav a {
-  color: #57534e !important;
-}
-
-.theme-light #main-navigation nav a:hover {
-  color: #0c0a09 !important;
-  background-color: rgba(245, 245, 244, 0.8) !important;
-}
-
-.theme-light #main-navigation #theme-toggle-button {
-  background-color: #f5f5f4 !important;
-  border-color: #e7e5e4 !important;
-  color: #44403c !important;
-}
-
-.theme-light #main-navigation #theme-toggle-button:hover {
-  background-color: #e7e5e4 !important;
-  color: #0c0a09 !important;
-}
-
-/* Light cards across features, steps, safety, compatibility */
-.theme-light .rounded-2xl {
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
-}
-
-/* Light mode primary CTA text stays crisp white */
-.theme-light #hero-download-button,
-.theme-light #download-section-primary-btn,
-.theme-light #nav-download-button,
-.theme-light #modal-confirm-download,
-.theme-light #support-mountly-donate-btn,
-.theme-light #donate-modal-external-link {
-  color: #ffffff !important;
-}
-
-/* Light mode secondary Hero button */
-.theme-light #hero-donate-button {
-  background-color: #ffffff !important;
-  border-color: #d6d3d1 !important;
-  color: #1c1917 !important;
-}
-
-.theme-light #hero-donate-button:hover {
-  background-color: #f5f5f4 !important;
-  border-color: #a8a29e !important;
-  color: #0c0a09 !important;
-}
-
-/* Light mode Product Preview macOS window */
-.theme-light #product-preview-window {
-  background-color: #ffffff !important;
-  border-color: #d6d3d1 !important;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04) !important;
-}
-
-/* Footer in light mode */
-.theme-light #site-footer {
-  background-color: #f5f5f4 !important;
-  border-color: #e7e5e4 !important;
-  color: #57534e !important;
-}
-
-.theme-light #site-footer span.text-white {
-  color: #0c0a09 !important;
-}
-
-.theme-light #site-footer nav button,
-.theme-light #site-footer nav a {
-  color: #57534e !important;
-}
-
-.theme-light #site-footer nav button:hover,
-.theme-light #site-footer nav a:hover {
-  color: #0c0a09 !important;
-}
-
-/* Subtle transitions on interactive elements */
-button, a {
+button,
+a {
   transition-property: color, background-color, border-color, box-shadow, opacity, transform;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
 }
