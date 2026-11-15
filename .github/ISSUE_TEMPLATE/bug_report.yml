@@ -1,0 +1,54 @@
+name: Bug report
+description: Something in Mountly isn't working
+labels: [bug]
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Mountly version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and Mac model
+      placeholder: "macOS 15.5, MacBook Air M2"
+    validations:
+      required: true
+  - type: dropdown
+    id: filesystem
+    attributes:
+      label: Drive filesystem
+      options: [NTFS, exFAT, FAT32, APFS, HFS+, Other or not sure]
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Plug in the drive
+        2. Click Enable Write Access
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: What happened instead
+      description: Add screenshots if you can.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostics
+      description: Open Diagnostics in Mountly, copy the report and paste it here.
+      render: text

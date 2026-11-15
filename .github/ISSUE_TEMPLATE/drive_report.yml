@@ -1,0 +1,35 @@
+name: Drive compatibility report
+description: Tell us how Mountly worked with your drive
+labels: [compatibility]
+body:
+  - type: input
+    id: drive
+    attributes:
+      label: Drive make and model
+      placeholder: "Samsung T7 1TB"
+    validations:
+      required: true
+  - type: dropdown
+    id: filesystem
+    attributes:
+      label: Filesystem
+      options: [NTFS, exFAT, FAT32, APFS, HFS+, Other]
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Did it work?
+      options: ["Yes, fully", Partly, "No"]
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and Mac model
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
