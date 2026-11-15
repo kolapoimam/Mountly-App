@@ -21,7 +21,7 @@ interface PrivacyPolicyPageProps {
   onBackToHome: () => void;
 }
 
-const PRIVACY_FAQS: AccordionEntry[] = [
+export const PRIVACY_FAQS: AccordionEntry[] = [
   {
     q: 'Does Mountly ever transmit disk names or serial numbers?',
     a: 'No. Device descriptors, volume labels, and filesystem partition tables are queried strictly in-memory using Apple DiskArbitration and are discarded upon eject or app termination.',

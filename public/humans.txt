@@ -1,0 +1,9 @@
+/* TEAM */
+Developer: Kolapo Imam
+Site: https://kolapo.ng
+
+/* SITE */
+Last update: 2026/11/15
+Product: Mountly, external drives made accessible
+Standards: HTML5, CSS3, schema.org
+Components: React, Vite, Tailwind CSS, Lucide

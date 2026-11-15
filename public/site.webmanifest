@@ -1,22 +1,19 @@
 {
-  "name": "Mountly",
+  "name": "Mountly — External drives, made accessible",
   "short_name": "Mountly",
-  "description": "External drives, made accessible. Modern macOS utility for detecting and mounting external filesystems.",
+  "description": "Free, open-source macOS utility for NTFS read and write on external drives.",
+  "id": "/",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "lang": "en",
   "background_color": "#faf6ee",
   "theme_color": "#faf6ee",
+  "categories": ["utilities", "productivity"],
   "icons": [
-    {
-      "src": "/favicon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    },
-    {
-      "src": "/og-image.png",
-      "sizes": "1200x630",
-      "type": "image/png"
-    }
+    { "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
   ]
 }

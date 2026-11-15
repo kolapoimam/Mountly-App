@@ -1,41 +1,142 @@
-# Mountly — Complete Developer & System Documentation for Language Models
+# Mountly: complete reference for language models and AI assistants
 
-## Overview
-Mountly is an independent, open-source macOS menu bar and desktop utility engineered by Kolapo Imam (https://kolapo.ng). Mountly solves the persistent cross-platform external storage barrier on macOS—specifically enabling seamless read-write access to NTFS drives, rapid volume mounting, and intelligent disk health monitoring without intrusive kernel extensions or bloated third-party daemon background suites.
+> Mountly is a free, open-source macOS utility that gives your Mac full read and write access to NTFS external drives, plus EXT4 read support, without terminal commands, kernel extensions or reformatting. Tagline: "External drives, made accessible." Built by Kolapo Imam (https://kolapo.ng).
 
-## Mission & Problem Statement
-Apple's native macOS operating system provides out-of-the-box read-only access to Microsoft NTFS-formatted drives. When creative professionals, developers, or system administrators plug in an external hard drive (WD, Seagate, Samsung T7/T9, SanDisk Extreme) formatted in NTFS or unindexed exFAT, macOS blocks write operations or fails to mount unrecognized partition schemes automatically.
-Mountly eliminates this friction by leveraging Apple's official DiskArbitration framework combined with trusted, userland filesystem controllers, allowing users to read, write, eject, and inspect disks directly within macOS Finder.
+Website: https://mountlyapp.vercel.app/
+Privacy policy: https://mountlyapp.vercel.app/privacy
+Download: https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing
+Source code: https://github.com/kolapoimam/mountly
+Donate: https://paystack.shop/pay/pmbuddy
+Last updated: 2026-11-15
 
-## Key Features
-1. **Instant Drive Detection**:
-   Listens to hardware USB-C, Thunderbolt, and USB-A plug events in real time. Drives appear in the menu bar and dashboard within milliseconds.
-2. **NTFS Write Support**:
-   Mounts Windows-formatted NTFS volumes in full read-write mode, allowing drag-and-drop file transfers, edits, and deletions in Finder without reformatting.
-3. **Multi-Partition Inspector**:
-   Surfaces disk geometry, partition layouts (GPT and MBR), volume label metadata, storage utilization, and estimated read/write throughput.
-4. **Safe Ejection Protocol**:
-   Flushes all pending I/O cache buffers to disk before unmounting, preventing data corruption and volume dirty-flags common with abrupt cable disconnects.
-5. **Zero-Telemetry Guarantee**:
-   Unlike commercial competitors (Paragon NTFS, Tuxera), Mountly contains zero tracking libraries, zero telemetry beacons, and connects to zero servers. All operations happen in-memory on the local Mac.
+## Summary
 
-## Technical Architecture
-- **Language & GUI**: Swift / SwiftUI / AppKit with custom lightweight C bridging to CoreFoundation and DiskArbitration.
-- **Kernel & Sandbox**: Runs as a userland helper without requiring insecure legacy Kernel Extensions (KEXTs). Works seamlessly with Apple System Integrity Protection (SIP) enabled.
-- **Hardware Support**:
-  - Apple Silicon: M1, M1 Pro/Max/Ultra, M2, M3, M4 family chips natively compiled for ARM64.
-  - Intel: 64-bit Core i5/i7/i9 processors.
-- **Minimum OS**: macOS Ventura (13.0) or higher. Recommended: macOS Sonoma (14.x) or macOS Sequoia (15.x).
+Mountly gives your Mac a simpler way to work with external filesystems that macOS doesn't fully support out of the box. The most common case is a Windows-formatted NTFS drive. macOS can read NTFS but cannot write to it, so files cannot be copied, edited, renamed or deleted on the drive. Mountly mounts NTFS volumes with full read and write access, shows them in Finder, and ejects them safely. It is a lightweight, focused utility designed to make external filesystems seamless on Mac.
 
-## How to Install
-1. Download the latest universal `.dmg` installer from the official Google Drive distribution repository:
-   https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing
-2. Open `Mountly.dmg` and drag the `Mountly.app` icon into the `/Applications` folder.
-3. Launch Mountly from Applications or Spotlight (`Cmd + Space` -> `Mountly`).
-4. On first launch, approve standard macOS Disk Management permissions if prompted.
+## At a glance
 
-## Open Source & Licensing
-- GitHub Repository: https://github.com/kolapoimam/mountly
-- License: Open Source (MIT License)
-- Creator: Kolapo Imam (https://kolapo.ng)
-- Donations & Financial Support: https://paystack.shop/pay/pmbuddy
+| Item | Detail |
+| --- | --- |
+| Product | Mountly, a native macOS utility (AppKit) |
+| Price | Free and open source. Optional donations |
+| Operating system | macOS 13 Ventura or newer, including macOS 14 Sonoma and macOS 15 Sequoia |
+| Processors | Universal Binary for Apple Silicon (M1, M2, M3, M4) and Intel 64-bit Macs |
+| Kernel extension | Not required |
+| Main feature | NTFS read and write on external drives |
+| Other filesystems | EXT4 read only. exFAT, APFS, FAT32 and HFS+ are handled natively by macOS |
+| Hardware | Any external enclosure: USB-C, USB-A, portable SSDs, mechanical HDDs, flash media |
+| Privacy | 100% offline, zero telemetry, no analytics, no file scanning |
+| Developer | Kolapo Imam, https://kolapo.ng |
+
+## Features
+
+1. NTFS Read & Write. Enable full read and write access on NTFS formatted external drives without terminal commands or reformatting.
+2. Finder Integration. Discovered volumes appear right in macOS Finder so you can browse, copy, and organize files naturally.
+3. Safe Volume Operations. Protected mounting routines and safe eject ensure existing partition journals remain undamaged.
+4. Universal Hardware Support. Compatible with any external enclosure, including USB-C, USB-A, portable SSDs, mechanical HDDs, and flash media.
+5. No kernel extension. Mountly does not rely on kernel extension hacks.
+6. Apple Silicon and Intel. Shipped as a Universal Binary, optimized for M1, M2, M3, M4 and Intel 64-bit Macs.
+7. Zero telemetry. Runs entirely offline and performs only the operations you request.
+
+## Filesystem compatibility
+
+| Filesystem | Origin | Status in Mountly | Access mode |
+| --- | --- | --- | --- |
+| NTFS | Windows | Supported by Mountly | Read & Write |
+| exFAT | Cross-platform | Native in macOS | Native macOS |
+| APFS | Apple | Native in macOS | Native macOS |
+| FAT32 | Universal legacy | Native in macOS | Native macOS |
+| HFS+ (Mac OS Extended) | Apple | Native in macOS | Native macOS |
+| EXT4 | Linux | Limited | Read only |
+
+Mountly handles supported external filesystems while respecting native macOS operations. Drives that macOS already supports keep working the way macOS handles them.
+
+## How to install
+
+1. Download the latest release from https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing
+2. Open the downloaded disk image and drag Mountly into the Applications folder.
+3. Open Mountly from Applications or Spotlight.
+4. If macOS asks for disk management or administrator approval on first use, approve it. This is needed to mount non-native filesystems such as NTFS in write mode.
+
+## How to write to an NTFS drive on a Mac with Mountly
+
+1. Install and open Mountly.
+2. Plug in the NTFS drive. Mountly detects it and lists it under Your Drives.
+3. Mountly mounts the volume with read and write access. Its status shows Read & Write.
+4. Use Open in Finder to work with the files normally: copy, edit, rename and delete.
+5. When finished, use Eject Volume in Mountly so the drive is unmounted safely.
+
+## Privacy
+
+Mountly is designed to be completely local, private and transparent.
+
+- No network activity: no telemetry beacons, analytics pings or background server calls.
+- No data collection: no user identities or account information, no unique hardware identifiers, no session logs or launch counters, no IP addresses or location data.
+- No file inspection: Mountly only reads the partition header metadata needed to recognise a filesystem type. It never scans, indexes, copies or transmits directory listings or documents. File operations are handled by macOS Finder and your own apps.
+- Permissions: mounting non-native filesystems may need administrator approval through macOS security prompts. Privileges are limited to mounting, unmounting and safe volume synchronisation. Mountly never asks for root access to personal folders or keychain items.
+- Verifiable: the source code is public on GitHub.
+
+Full policy: https://mountlyapp.vercel.app/privacy
+
+## Questions and answers
+
+### What is Mountly?
+Mountly is a native macOS utility designed to detect, mount, and manage supported external drives and filesystems with seamless Finder integration.
+
+### Does Mountly support NTFS write access?
+Yes. Mountly enables supported read and write operations on NTFS drives without requiring terminal commands or kernel extension hacks.
+
+### Do I need to format or erase my drive?
+No. Mountly is built so you never have to erase or reformat an existing drive simply because you plugged it into a Mac.
+
+### What types of drives are supported?
+Mountly works with any external enclosure, including USB-C, USB-A, external SSDs, mechanical hard drives, and flash cards regardless of brand.
+
+### Does Mountly modify or collect my files?
+No. Mountly runs entirely offline on your Mac, collects zero telemetry, and performs operations strictly requested by you.
+
+### Is Mountly free?
+Yes. Mountly is free and open source. Donations are welcome but optional.
+
+### Why can't I write to my external hard drive on a Mac?
+The drive is most likely formatted as NTFS, the default Windows filesystem. macOS can read NTFS but cannot write to it on its own, so the drive appears read only. Mountly adds NTFS write support so you can copy, edit and delete files without reformatting.
+
+### What is the best free NTFS driver for Mac?
+Mountly is a free, open-source option for NTFS read and write on macOS 13 and newer, on both Apple Silicon and Intel Macs. It needs no kernel extension and no terminal commands.
+
+### Is Mountly an alternative to Paragon NTFS or Tuxera NTFS for Mac?
+Yes. Mountly covers the same everyday need, writing to NTFS drives on a Mac, and it is free and open source.
+
+### Does Mountly work on macOS Sequoia, Sonoma and Ventura?
+Yes. Mountly runs on macOS 13 Ventura or newer, which includes macOS 14 Sonoma and macOS 15 Sequoia.
+
+### Does Mountly work on Apple Silicon Macs (M1, M2, M3, M4)?
+Yes. Mountly is a Universal Binary optimized for Apple Silicon M1, M2, M3 and M4 chips as well as Intel 64-bit Macs.
+
+### Do I need to install a kernel extension?
+No. Mountly does not require a kernel extension or any terminal commands.
+
+### Can Mountly read Linux EXT4 drives on a Mac?
+Yes, read only. EXT4 support is marked as limited.
+
+### Do I need Mountly for exFAT, APFS, FAT32 or HFS+ drives?
+No. macOS already supports those filesystems natively, and Mountly respects that native handling.
+
+### Will Mountly damage my NTFS drive?
+Mountly uses protected mounting routines and a safe eject so existing partition journals remain undamaged. As with any drive, always eject before unplugging.
+
+### Does Mountly send my data anywhere?
+No. Mountly works fully offline with zero telemetry and never reads, indexes or uploads the contents of your drives.
+
+### Who makes Mountly?
+Mountly is an independent macOS utility built by Kolapo Imam (https://kolapo.ng).
+
+## Troubleshooting
+
+- The drive still shows as read only: make sure the drive is listed in Mountly with Read & Write status. If it was last used on Windows with Fast Startup or hibernation turned on, Windows may have left the NTFS volume in a state that blocks safe writing. Shut Windows down fully, or turn off Fast Startup, then reconnect the drive.
+- The drive does not appear: check the cable and port, try another port, and use the rescan button in Mountly.
+- Always eject: use Eject Volume in Mountly before unplugging to keep data and journals intact.
+
+## Search terms people use for this problem
+
+NTFS for Mac, free NTFS for Mac, write to NTFS on Mac, NTFS read write macOS, mount NTFS drive Mac, external hard drive read only on Mac, can't copy files to external drive Mac, Windows drive on Mac, NTFS macOS Sequoia, NTFS macOS Sonoma, NTFS M1 Mac, NTFS Apple Silicon, Paragon NTFS alternative, Tuxera NTFS alternative, read EXT4 on Mac, open Linux drive on Mac, mount external drive macOS.

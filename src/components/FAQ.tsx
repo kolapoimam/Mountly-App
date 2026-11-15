@@ -2,7 +2,7 @@ import { Accordion } from './Accordion';
 import type { AccordionEntry } from './Accordion';
 import { SectionEyebrow } from './Brand';
 
-const FAQS: AccordionEntry[] = [
+export const FAQS: AccordionEntry[] = [
   {
     q: 'What is Mountly?',
     a: 'Mountly is a native macOS utility designed to detect, mount, and manage supported external drives and filesystems with seamless Finder integration.',

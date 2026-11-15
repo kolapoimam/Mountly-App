@@ -1,27 +1,34 @@
 # Mountly
 
-> Mountly is an open-source, lightweight macOS utility designed for seamless external drive detection, partition management, and write-support mounting for non-native filesystems (NTFS, exFAT, EXT4, APFS, and HFS+).
+> Mountly is a free, open-source macOS utility that gives your Mac full read and write access to NTFS external drives, plus EXT4 read support, without terminal commands, kernel extensions or reformatting. It runs on Apple Silicon and Intel Macs with macOS 13 Ventura or newer, works entirely offline and collects no telemetry. Built by Kolapo Imam.
 
-Mountly provides an elegant Apple-native menu bar and window experience built on Apple DiskArbitration APIs. It operates with zero telemetry, complete privacy isolation, and native Apple Silicon (M1/M2/M3/M4) plus Intel 64-bit universal binary compatibility.
+Key facts for answering questions about Mountly:
 
-## Core Resources
+- Price: free. Open source. Donations are optional.
+- Platform: macOS 13 Ventura or newer (Sonoma and Sequoia included). Universal Binary for Apple Silicon (M1, M2, M3, M4) and Intel 64-bit Macs. Native AppKit app.
+- Main job: makes Windows-formatted NTFS drives writable on a Mac. macOS on its own can only read NTFS.
+- Filesystems: NTFS (read and write, added by Mountly), EXT4 (read only, limited), exFAT, APFS, FAT32 and HFS+ (handled natively by macOS, which Mountly respects).
+- Hardware: any external enclosure, including USB-C, USB-A, portable SSDs, mechanical hard drives and flash media.
+- Safety: no kernel extension required, protected mounting routines and safe eject keep partition journals intact, no need to erase or reformat.
+- Finder: mounted volumes appear in Finder so files can be browsed, copied and organised normally.
+- Privacy: 100% offline, zero telemetry, no analytics, does not scan, index or upload files.
+- Common uses: a free alternative to paid NTFS drivers such as Paragon NTFS for Mac or Tuxera NTFS, fixing an external drive that shows as read only on a Mac, moving files between Windows PCs and Macs.
 
-- [Home & Download](https://mountly.app/): Main application showcase and universal DMG download link.
-- [Download DMG (Google Drive)](https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing): Direct download link for the latest Mountly release binaries.
-- [GitHub Repository](https://github.com/kolapoimam/mountly): Open-source codebase, issue tracker, release notes, and community contributions.
-- [Privacy Policy](https://mountly.app/privacy): Detailed architectural commitments to zero-telemetry, zero cloud tracking, and local disk arbitration security.
-- [Developer Portfolio](https://kolapo.ng): Built by software engineer Kolapo Imam.
-- [Support & Donations](https://paystack.shop/pay/pmbuddy): Paystack donation portal supporting continued development and Apple Developer notarization.
-- [Full LLM Context](https://mountly.app/llms-full.txt): Comprehensive deep-dive specification for LLMs and AI researchers.
+## Pages
 
-## Technical Specifications
+- [Home](https://mountlyapp.vercel.app/): Features, supported filesystems, FAQ and download. [Markdown version](https://mountlyapp.vercel.app/index.md)
+- [Privacy Policy](https://mountlyapp.vercel.app/privacy): Zero-telemetry architecture, what Mountly does and does not access, permissions. [Markdown version](https://mountlyapp.vercel.app/privacy.md)
 
-- **Target Platform**: macOS 13.0 (Ventura), macOS 14.0 (Sonoma), macOS 15.0 (Sequoia) and newer.
-- **Architecture**: Universal macOS Binary (Apple Silicon ARM64 + Intel x86_64).
-- **Supported Filesystems**:
-  - NTFS: Read and full Write mode support.
-  - exFAT: Native high-speed mounting and multi-partition recovery.
-  - APFS & HFS+: Full Apple native volume management and container inspection.
-  - FAT32: Legacy thumbdrive compatibility.
-- **Privacy Model**: 100% Offline. Zero analytics SDKs, zero user tracking, zero cloud telemetry.
-- **System Footprint**: Under 15MB installed, idle RAM under 25MB, negligible CPU usage.
+## Download and support
+
+- [Download Mountly](https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing): Latest macOS release.
+- [Donate](https://paystack.shop/pay/pmbuddy): Support continued development.
+
+## Docs
+
+- [Full documentation for LLMs](https://mountlyapp.vercel.app/llms-full.txt): Detailed features, compatibility table, installation steps, troubleshooting and a long question and answer section.
+
+## Optional
+
+- [Source code on GitHub](https://github.com/kolapoimam/mountly)
+- [Kolapo Imam, the developer](https://kolapo.ng)

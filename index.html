@@ -2,108 +2,45 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Core Identity & SEO -->
-    <title>Mountly — External drives, made accessible.</title>
-    <meta name="description" content="Mountly is a macOS utility for detecting, mounting and managing supported external filesystems." />
-    <meta name="keywords" content="Mountly, macOS disk utility, NTFS write Mac, mount external drive macOS, Apple Silicon disk mounter, exFAT macOS, APFS manager, Kolapo Imam, open source macOS app, DiskArbitration" />
-    <meta name="author" content="Kolapo Imam" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://mountly.app/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <!-- Per-page title, description, canonical, social cards and JSON-LD.
+         Replaced at build time by scripts/prerender.mjs from src/seo.ts. -->
+    <!--seo:start-->
+    <title>Mountly — Free NTFS for Mac: Read & Write External Drives</title>
+    <meta name="description" content="Free, open-source macOS app to read and write NTFS drives on Mac. Mount NTFS, exFAT, APFS, FAT32, HFS+ and EXT4 without kernel extensions or reformatting." />
+    <link rel="canonical" href="https://mountlyapp.vercel.app/" />
+    <!--seo:end-->
+
+    <!-- App identity -->
+    <meta name="application-name" content="Mountly" />
+    <meta name="apple-mobile-web-app-title" content="Mountly" />
     <meta name="theme-color" content="#faf6ee" />
     <meta name="color-scheme" content="light" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <!-- Open Graph / Facebook / LinkedIn / Discord -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Mountly" />
-    <meta property="og:url" content="https://mountly.app/" />
-    <meta property="og:title" content="Mountly — External drives, made accessible." />
-    <meta property="og:description" content="Mountly is a macOS utility for detecting, mounting and managing supported external filesystems." />
-    <meta property="og:image" content="/og-image.png" />
-    <meta property="og:image:secure_url" content="/og-image.png" />
-    <meta property="og:image:type" content="image/png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Mountly macOS External Drive Utility Preview" />
-
-    <!-- Twitter / X Cards -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@kolapoimam" />
-    <meta name="twitter:creator" content="@kolapoimam" />
-    <meta name="twitter:url" content="https://mountly.app/" />
-    <meta name="twitter:title" content="Mountly — External drives, made accessible." />
-    <meta name="twitter:description" content="Mountly is a macOS utility for detecting, mounting and managing supported external filesystems." />
-    <meta name="twitter:image" content="/og-image.png" />
-    <meta name="twitter:image:alt" content="Mountly macOS External Drive Utility Preview" />
-
-    <!-- LLMs.txt & Machine-Readable AI Discoverability -->
-    <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM context summary" />
-    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="LLM full documentation" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-    <!-- Favicon & Touch Icons -->
+    <!-- Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+
+    <!-- Machine-readable context for search engines and AI assistants -->
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="alternate" type="text/plain" href="/llms.txt" title="Mountly summary for LLMs" />
+    <link rel="alternate" type="text/plain" href="/llms-full.txt" title="Mountly full documentation for LLMs" />
+    <link rel="alternate" type="text/markdown" href="/index.md" title="Mountly home page as Markdown" />
+    <link rel="author" href="https://kolapo.ng" />
 
     <!-- Typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-
-    <!-- JSON-LD Structured Data for Search Engines & Knowledge Graphs -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "SoftwareApplication",
-          "@id": "https://mountly.app/#software",
-          "name": "Mountly",
-          "operatingSystem": "macOS 13.0 or later (Ventura, Sonoma, Sequoia)",
-          "applicationCategory": "UtilitiesApplication",
-          "applicationSubCategory": "Disk Management",
-          "description": "Mountly is an open-source macOS utility for detecting, mounting and managing external filesystems including NTFS read and write support.",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-          },
-          "downloadUrl": "https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing",
-          "author": {
-            "@type": "Person",
-            "name": "Kolapo Imam",
-            "url": "https://kolapo.ng"
-          },
-          "featureList": [
-            "Instant hardware disk detection via Apple DiskArbitration",
-            "Full NTFS read and write mounting on macOS",
-            "Multi-partition inspector and safe unmounting cache flush",
-            "Zero telemetry and 100% offline privacy architecture",
-            "Universal binary for Apple Silicon M1-M4 and Intel 64-bit"
-          ]
-        },
-        {
-          "@type": "WebSite",
-          "@id": "https://mountly.app/#website",
-          "url": "https://mountly.app/",
-          "name": "Mountly",
-          "description": "External drives, made accessible. Modern macOS utility for detecting and mounting external filesystems.",
-          "inLanguage": "en-US",
-          "author": {
-            "@type": "Person",
-            "name": "Kolapo Imam",
-            "url": "https://kolapo.ng"
-          }
-        }
-      ]
-    }
-    </script>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
-

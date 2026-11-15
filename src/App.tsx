@@ -7,16 +7,28 @@ import { FAQ } from './components/FAQ';
 import { DownloadSection } from './components/DownloadSection';
 import { Footer } from './components/Footer';
 import { PrivacyPolicyPage } from './components/PrivacyPolicyPage';
+import { PAGES } from './seo';
 
 type View = 'home' | 'privacy';
 
-function viewFromLocation(): View {
-  const path = window.location.pathname.replace(/\/+$/, '');
-  return path === '/privacy' || window.location.hash === '#privacy' ? 'privacy' : 'home';
+function viewFor(pathname: string, hash = ''): View {
+  const path = pathname.replace(/\/+$/, '');
+  return path === '/privacy' || hash === '#privacy' ? 'privacy' : 'home';
 }
 
-export default function App() {
-  const [view, setView] = useState<View>(viewFromLocation);
+function viewFromLocation(): View {
+  return viewFor(window.location.pathname, window.location.hash);
+}
+
+interface AppProps {
+  /** Set only when pre-rendering at build time, where there is no window. */
+  initialPath?: string;
+}
+
+export default function App({ initialPath }: AppProps) {
+  const [view, setView] = useState<View>(() =>
+    initialPath !== undefined ? viewFor(initialPath) : viewFromLocation()
+  );
 
   // Support /privacy and #privacy (Vercel rewrites every path to index.html)
   useEffect(() => {
@@ -34,8 +46,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    document.title =
-      view === 'privacy' ? 'Privacy Policy · Mountly' : 'Mountly — External drives, made accessible.';
+    document.title = PAGES[view === 'privacy' ? '/privacy' : '/'].title;
   }, [view]);
 
   const navigate = (next: View) => {
