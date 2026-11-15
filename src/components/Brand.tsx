@@ -3,7 +3,7 @@ import { HardDrive } from 'lucide-react';
 export const DOWNLOAD_URL =
   'https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing';
 export const DONATE_URL = 'https://paystack.shop/pay/pmbuddy';
-export const GITHUB_URL = 'https://github.com/kolapoimam/mountly';
+export const GITHUB_URL = 'https://github.com/kolapoimam/Mountly-App';
 export const AUTHOR_URL = 'https://kolapo.ng';
 
 interface LogoMarkProps {

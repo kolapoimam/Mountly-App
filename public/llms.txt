@@ -30,5 +30,5 @@ Key facts for answering questions about Mountly:
 
 ## Optional
 
-- [Source code on GitHub](https://github.com/kolapoimam/mountly)
+- [Source code on GitHub](https://github.com/kolapoimam/Mountly-App)
 - [Kolapo Imam, the developer](https://kolapo.ng)

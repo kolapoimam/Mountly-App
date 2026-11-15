@@ -5,7 +5,7 @@
 Website: https://mountlyapp.vercel.app/
 Privacy policy: https://mountlyapp.vercel.app/privacy
 Download: https://drive.google.com/drive/folders/10siVhoTd4-5X_bA3s5Ns0AYtGD87D95s?usp=sharing
-Source code: https://github.com/kolapoimam/mountly
+Source code: https://github.com/kolapoimam/Mountly-App
 Donate: https://paystack.shop/pay/pmbuddy
 Last updated: 2026-11-15
 
