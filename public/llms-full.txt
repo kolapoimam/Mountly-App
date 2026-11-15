@@ -75,6 +75,7 @@ Mountly is designed to be completely local, private and transparent.
 - No file inspection: Mountly only reads the partition header metadata needed to recognise a filesystem type. It never scans, indexes, copies or transmits directory listings or documents. File operations are handled by macOS Finder and your own apps.
 - Permissions: mounting non-native filesystems may need administrator approval through macOS security prompts. Privileges are limited to mounting, unmounting and safe volume synchronisation. Mountly never asks for root access to personal folders or keychain items.
 - Verifiable: the source code is public on GitHub.
+- Website only: the mountlyapp.vercel.app website uses Google Analytics through Google Tag Manager to measure visits and clicks. This does not apply to the Mountly app.
 
 Full policy: https://mountlyapp.vercel.app/privacy
 

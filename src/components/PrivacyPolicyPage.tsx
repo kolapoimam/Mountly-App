@@ -153,7 +153,7 @@ export function PrivacyPolicyPage({ onBackToHome }: PrivacyPolicyPageProps) {
               Mountly is designed from first principles to be completely local, private, and transparent. We never track you, collect data, or connect to external servers.
             </p>
             <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-2 font-mono text-[13px] text-subtle">
-              <span>Effective: September 2026</span>
+              <span>Effective: November 2026</span>
               <span aria-hidden="true">·</span>
               <span>Universal macOS Utility</span>
               <span aria-hidden="true">·</span>
@@ -220,7 +220,7 @@ export function PrivacyPolicyPage({ onBackToHome }: PrivacyPolicyPageProps) {
 
             <PolicySection number="04" badge="bg-sun-tint text-sun-ink" title="Website & Download Integrity">
               <p className="text-base leading-relaxed text-muted">
-                This website is delivered as static HTML, JavaScript, and CSS. No advertising networks, marketing trackers, or tracking cookies are employed on this domain. Downloads are verified and hosted directly without third-party ad-wrappers or data capture intermediaries.
+                This website is delivered as static HTML, JavaScript, and CSS. To understand how visitors use it, the website uses Google Analytics through Google Tag Manager, which sets cookies and records anonymous usage such as pages viewed, buttons clicked, downloads started, and page performance. No advertising networks are used. Downloads are hosted directly without third-party ad-wrappers or data capture intermediaries. This applies only to the website. The Mountly app itself sends no data at all.
               </p>
             </PolicySection>
 

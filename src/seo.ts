@@ -64,7 +64,7 @@ export const PAGES: Record<Route, PageMeta> = {
     path: '/privacy',
     title: 'Privacy Policy · Mountly — Zero-Telemetry macOS Drive Utility',
     description:
-      'Mountly runs 100% offline. No telemetry, no analytics, no file scanning. Read how the free macOS NTFS utility handles your drives and data.',
+      'The Mountly app runs 100% offline. No telemetry, no analytics, no file scanning. Read how the free macOS NTFS utility handles your drives and data.',
     ogTitle: 'Mountly Privacy Policy — 100% offline, zero telemetry',
   },
 };

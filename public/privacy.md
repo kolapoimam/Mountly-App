@@ -1,6 +1,6 @@
 # Mountly Privacy Policy
 
-Effective: September 2026 · Universal macOS Utility · 100% Offline
+Effective: November 2026 · Universal macOS Utility · 100% Offline
 
 Mountly is designed from first principles to be completely local, private, and transparent. We never track you, collect data, or connect to external servers.
 
@@ -33,7 +33,7 @@ Privileges are confined strictly to standard disk mount/unmount operations and s
 
 ## 04. Website & Download Integrity
 
-This website is delivered as static HTML, JavaScript, and CSS. No advertising networks, marketing trackers, or tracking cookies are employed on this domain. Downloads are verified and hosted directly without third-party ad-wrappers or data capture intermediaries.
+This website is delivered as static HTML, JavaScript, and CSS. To understand how visitors use it, the website uses Google Analytics through Google Tag Manager, which sets cookies and records anonymous usage such as pages viewed, buttons clicked, downloads started, and page performance. No advertising networks are used. Downloads are hosted directly without third-party ad-wrappers or data capture intermediaries. This applies only to the website. The Mountly app itself sends no data at all.
 
 ## 05. Open Source Verification & Auditing
 
