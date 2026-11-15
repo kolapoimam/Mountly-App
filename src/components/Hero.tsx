@@ -54,24 +54,6 @@ export function Hero() {
         <div aria-hidden="true" className="absolute inset-x-[4%] -bottom-9 top-16 rounded-[40px] bg-cobalt" />
         <div aria-hidden="true" className="dot-grid absolute inset-x-[4%] -bottom-9 top-16 rounded-[40px]" />
 
-        <span
-          aria-hidden="true"
-          className="absolute -left-[150px] top-10 z-10 hidden -rotate-[8deg] rounded-2xl bg-tangerine px-4 py-2.5 font-mono text-[15px] font-medium text-white shadow-[0_10px_24px_rgba(238,106,47,0.35)] xl:block"
-        >
-          NTFS → Read &amp; Write
-        </span>
-        <span
-          aria-hidden="true"
-          className="absolute -right-[130px] top-52 z-10 hidden rotate-6 rounded-2xl bg-sun px-4 py-2.5 font-mono text-[15px] font-medium text-ink shadow-[0_10px_24px_rgba(242,182,48,0.4)] xl:block"
-        >
-          No kext needed
-        </span>
-        <span
-          aria-hidden="true"
-          className="absolute -left-[120px] bottom-24 z-10 hidden rotate-[5deg] rounded-2xl bg-mint px-4 py-2.5 font-mono text-[15px] font-medium text-white shadow-[0_10px_24px_rgba(19,138,94,0.35)] xl:block"
-        >
-          Safe eject ✓
-        </span>
 
         <div className="relative z-[5] mx-0 sm:mx-[7%]">
           <ProductPreview />
